@@ -132,14 +132,14 @@ docker compose up -d aggregator broker storage
 
 ```
 python -m venv .venv
-source .venv/bin/activate
+.\.venv\Scripts\Activate.ps1
 pip install pytest httpx
 ```
 
 ### Menjalankan Test
 
 ```
-pytest -q
+pytest -q -v
 ```
 
 ## Lampiran
