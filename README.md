@@ -1,4 +1,4 @@
-# Pub–Sub Aggregator
+# Pub–Sub Log Aggregator
 
 ## Build dan Menjalankan Sistem
 
