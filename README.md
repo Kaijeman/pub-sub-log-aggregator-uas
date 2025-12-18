@@ -1,4 +1,4 @@
-# Pub–Sub Log Aggregator
+# Pub–Sub Aggregator
 
 ## Build dan Menjalankan Sistem
 
@@ -120,6 +120,38 @@ received = unique_processed + duplicate_dropped
 
 ---
 
+## Pengujian Event dan Persistensi Data
+
+### Mengecek Event yang Tersimpan
+
+Setelah seluruh event selesai diproses, event unik yang tersimpan di database dapat dicek menggunakan endpoint berikut:
+
+```
+curl "http://localhost:8080/events?topic=auth"
+```
+
+Perintah ini menampilkan daftar event unik berdasarkan topic tertentu. Hasil ini menjadi bukti bahwa event duplikat tidak disimpan lebih dari satu kali dan mekanisme deduplication berjalan dengan benar.
+
+### Menguji Persistensi Data (Crash dan Recreate Container)
+
+Untuk membuktikan bahwa data tetap tersimpan meskipun container dihentikan atau dihapus, lakukan penghapusan container aggregator lalu jalankan kembali container tersebut:
+
+```
+docker compose rm -sf aggregator
+docker compose up -d aggregator
+```
+
+Setelah container aktif kembali, lakukan pengecekan ulang metrik dan event:
+
+```
+curl http://localhost:8080/stats
+curl "http://localhost:8080/events?topic=auth"
+```
+
+Jika nilai metrik dan daftar event tetap tersedia dan tidak kembali ke nol, maka persistensi data melalui Docker volume PostgreSQL terbukti berjalan dengan benar.
+
+---
+
 ## Testing Otomatis (Pytest)
 
 ### Menjalankan Service Inti
@@ -143,4 +175,4 @@ pytest -q -v
 ```
 
 ## Lampiran
-Link video YouTube: 
+Link Video YouTube: https://www.youtube.com/watch?v=Xi5UWjmE5Sg
