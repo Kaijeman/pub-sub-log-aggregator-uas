@@ -2,11 +2,6 @@
 
 ## Build dan Menjalankan Sistem
 
-### Prasyarat
-
-* Docker
-* Docker Compose
-
 ### Build dan Run
 
 ```
