@@ -147,7 +147,7 @@ Jika nilai metrik dan daftar event tetap tersedia dan tidak kembali ke nol, maka
 
 ---
 
-## Testing Otomatis (Pytest)
+## Testing Pytest
 
 ### Menjalankan Service Inti
 
