@@ -1,4 +1,4 @@
-# Pub–Sub Aggregator
+# Pub–Sub Log Aggregator
 
 ## Build dan Menjalankan Sistem
 
@@ -21,7 +21,7 @@ docker compose ps
 
 Service yang diekspos ke host:
 
-* aggregator: [http://localhost:8080](http://localhost:8080)
+* aggregator: [http://localhost:8080]
 
 Redis dan PostgreSQL tidak mengekspos port ke host dan hanya tersedia di jaringan internal Docker.
 
