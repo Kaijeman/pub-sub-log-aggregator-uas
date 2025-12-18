@@ -3,10 +3,6 @@ import httpx
 
 
 def wait_until(condition_fn, timeout=5.0, interval=0.2):
-    """
-    Helper untuk menunggu sampai kondisi terpenuhi
-    (karena processing async / worker-based).
-    """
     start = time.time()
     while time.time() - start < timeout:
         if condition_fn():
@@ -16,9 +12,6 @@ def wait_until(condition_fn, timeout=5.0, interval=0.2):
 
 
 def test_stats_endpoint_exists(base_url):
-    """
-    Pastikan endpoint /stats hidup dan format JSON benar.
-    """
     r = httpx.get(f"{base_url}/stats")
     assert r.status_code == 200
 
@@ -37,9 +30,6 @@ def test_stats_endpoint_exists(base_url):
 
 
 def test_stats_received_increases_after_publish(base_url):
-    """
-    Setelah publish event, counter received harus naik.
-    """
     before = httpx.get(f"{base_url}/stats").json()
 
     event = {
@@ -60,9 +50,6 @@ def test_stats_received_increases_after_publish(base_url):
 
 
 def test_stats_unique_processed_increases_for_new_event(base_url):
-    """
-    Event baru (unik) harus menaikkan unique_processed.
-    """
     before = httpx.get(f"{base_url}/stats").json()
 
     event = {
@@ -83,9 +70,6 @@ def test_stats_unique_processed_increases_for_new_event(base_url):
 
 
 def test_stats_duplicate_dropped_increases_for_duplicate_event(base_url):
-    """
-    Publish event yang sama dua kali → duplicate_dropped harus naik.
-    """
     before = httpx.get(f"{base_url}/stats").json()
 
     event = {
@@ -108,11 +92,6 @@ def test_stats_duplicate_dropped_increases_for_duplicate_event(base_url):
 
 
 def test_stats_consistency_rules(base_url):
-    """
-    Invariant penting:
-    - unique_processed <= received
-    - duplicate_dropped <= received
-    """
     stats = httpx.get(f"{base_url}/stats").json()
 
     assert stats["unique_processed"] <= stats["received"]
@@ -120,9 +99,6 @@ def test_stats_consistency_rules(base_url):
 
 
 def test_uptime_increases_over_time(base_url):
-    """
-    uptime harus bertambah seiring waktu (basic sanity check).
-    """
     s1 = httpx.get(f"{base_url}/stats").json()
     time.sleep(1.0)
     s2 = httpx.get(f"{base_url}/stats").json()

@@ -39,7 +39,7 @@ async def process_one(db: DB, payload: Dict[str, Any]) -> str:
     ts = datetime.fromisoformat(raw_ts.replace("Z", "+00:00"))
 
     source = payload["source"]
-    body = json.dumps(payload["payload"])  # <-- INI YANG HILANG
+    body = json.dumps(payload["payload"])
 
     async with db.pool.acquire() as conn:
         async with conn.transaction(isolation="read_committed"):
