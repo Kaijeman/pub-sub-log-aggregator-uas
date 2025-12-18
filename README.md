@@ -10,7 +10,7 @@
 ### Build dan Run
 
 ```
-docker compose up -d --build
+docker compose up -d --build aggregator broker storage
 ```
 
 ### Cek Status Service
