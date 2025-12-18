@@ -80,7 +80,6 @@ def test_stats_duplicate_dropped_increases_for_duplicate_event(base_url):
         "payload": {"value": 999}
     }
 
-    # Kirim dua kali
     httpx.post(f"{base_url}/publish", json=event).raise_for_status()
     httpx.post(f"{base_url}/publish", json=event).raise_for_status()
 
